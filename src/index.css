@@ -377,7 +377,7 @@ body {
   position: relative;
   z-index: 1;
 }
-/* 🔥 LIGHT FLAME BACKGROUND */
+/* 🤍 WHITE FLAME BACKGROUND */
 .flame-bg {
   position: fixed;
   inset: 0;
@@ -386,18 +386,18 @@ body {
 
   background: radial-gradient(
       circle at bottom,
-      rgba(255, 120, 60, 0.15),
+      rgba(255, 255, 255, 0.35),
       transparent 60%
     ),
     linear-gradient(
       to top,
-      rgba(255, 100, 0, 0.15),
-      rgba(255, 165, 0, 0.05),
+      rgba(255, 255, 255, 0.25),
+      rgba(255, 255, 255, 0.15),
       transparent
     );
 }
 
-/* 🔥 FLAME WAVES */
+/* 🤍 WHITE FLAME WAVES */
 .flame-bg::before,
 .flame-bg::after {
   content: "";
@@ -407,20 +407,20 @@ body {
   height: 120%;
   background: radial-gradient(
     circle at bottom,
-    rgba(255, 140, 0, 0.25),
-    rgba(255, 80, 0, 0.12),
+    rgba(255, 255, 255, 0.28),
+    rgba(220, 220, 220, 0.14),
     transparent 70%
   );
-  filter: blur(80px);
+  filter: blur(90px);
   animation: flameMove 12s ease-in-out infinite alternate;
 }
 
 .flame-bg::after {
   animation-delay: 6s;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
-/* 🔥 FLAME MOVEMENT */
+/* 🤍 WHITE FLAME MOTION */
 @keyframes flameMove {
   from {
     transform: translateX(-10%) translateY(0);
@@ -430,20 +430,20 @@ body {
   }
 }
 
-/* 🔥 EXTRA GLOW FLOATERS */
+/* 🤍 SOFT WHITE FLOATING GLOWS */
 .bg-wrapper::before {
   content: "";
   position: fixed;
   bottom: -30%;
   left: 20%;
-  width: 400px;
-  height: 400px;
+  width: 420px;
+  height: 420px;
   background: radial-gradient(
     circle,
-    rgba(255, 160, 0, 0.25),
+    rgba(255, 255, 255, 0.3),
     transparent 70%
   );
-  filter: blur(100px);
+  filter: blur(120px);
   animation: emberFloat 14s ease-in-out infinite alternate;
   z-index: -1;
 }
@@ -453,14 +453,14 @@ body {
   position: fixed;
   bottom: -35%;
   right: 15%;
-  width: 300px;
-  height: 300px;
+  width: 320px;
+  height: 320px;
   background: radial-gradient(
     circle,
-    rgba(255, 80, 0, 0.2),
+    rgba(220, 220, 220, 0.25),
     transparent 70%
   );
-  filter: blur(90px);
+  filter: blur(110px);
   animation: emberFloat 16s ease-in-out infinite alternate;
   animation-delay: 6s;
   z-index: -1;
@@ -474,24 +474,26 @@ body {
     transform: translateY(-60px);
   }
 }
+
 /* =========================
-   🔥 REALISTIC HEAT BACKGROUND
+   🤍 REALISTIC WHITE HEAT
    ========================= */
 
 .heat-bg {
   position: fixed;
   inset: 0;
   z-index: -1;
+  overflow: hidden;
+
   background: linear-gradient(
     to top,
-    rgba(255, 90, 0, 0.12),
-    rgba(255, 140, 0, 0.05),
+    rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.08),
     transparent 60%
   );
-  overflow: hidden;
 }
 
-/* 🔥 HEAT GLOW BASE */
+/* 🤍 HEAT BASE GLOW */
 .heat-bg::before {
   content: "";
   position: absolute;
@@ -502,37 +504,37 @@ body {
   height: 60%;
   background: radial-gradient(
     ellipse at center,
-    rgba(255, 120, 0, 0.35),
-    rgba(255, 80, 0, 0.15),
+    rgba(255, 255, 255, 0.4),
+    rgba(200, 200, 200, 0.18),
     transparent 70%
   );
-  filter: blur(120px);
+  filter: blur(140px);
   animation: heatPulse 8s ease-in-out infinite;
 }
 
-/* 🔥 MICRO EMBERS (REALISM) */
+/* 🤍 MICRO WHITE EMBERS */
 .heat-bg::after {
   content: "";
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(rgba(255,160,80,0.45) 1px, transparent 1px),
-    radial-gradient(rgba(255,120,60,0.35) 1px, transparent 1px);
-  background-size: 120px 120px, 180px 180px;
-  background-position: 0 0, 60px 90px;
-  animation: emberRise 30s linear infinite;
-  opacity: 0.15;
+    radial-gradient(rgba(255,255,255,0.45) 1px, transparent 1px),
+    radial-gradient(rgba(200,200,200,0.35) 1px, transparent 1px);
+  background-size: 140px 140px, 200px 200px;
+  background-position: 0 0, 70px 100px;
+  animation: emberRise 35s linear infinite;
+  opacity: 0.12;
 }
 
-/* 🔥 HEAT BREATHING */
+/* 🤍 HEAT PULSE */
 @keyframes heatPulse {
   0% {
     opacity: 0.5;
     transform: translateX(-50%) scale(1);
   }
   50% {
-    opacity: 0.8;
-    transform: translateX(-50%) scale(1.08);
+    opacity: 0.85;
+    transform: translateX(-50%) scale(1.1);
   }
   100% {
     opacity: 0.5;
@@ -540,47 +542,16 @@ body {
   }
 }
 
-/* 🔥 EMBERS FLOAT UP */
+/* 🤍 EMBERS RISE */
 @keyframes emberRise {
   from {
-    background-position: 0 0, 60px 90px;
+    background-position: 0 0, 70px 100px;
   }
   to {
-    background-position: 0 -600px, 60px -400px;
+    background-position: 0 -700px, 70px -500px;
   }
 }
 
-/* 🔮 HERO SECTION */
-.hero-section {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  text-align: center;
-}
-
-/* 🧙 LOGO */
-.hero-logo {
-  width: 180px;
-  max-width: 70vw;
-  margin-bottom: 1rem;
-  filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.8));
-}
-
-/* 📅 DATE TEXT */
-.hero-date {
-  font-size: 1.1rem;
-  opacity: 0.85;
-}
-
-/* 📱 MOBILE FIX */
-@media (max-width: 600px) {
-  .hero-logo {
-    width: 140px;
-  }
-}
 /* ===========================
    🧙‍♂️ TECH WIZARD HERO STYLE
    =========================== */
@@ -674,18 +645,28 @@ body {
 }
 
 .rule-card {
-  padding: 1.5rem;
-  border-radius: 16px;
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.12);
-  transition: 0.3s;
+  padding: 1.6rem;
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    inset 0 0 20px rgba(255, 255, 255, 0.05),
+    0 20px 40px rgba(0, 0, 0, 0.4);
+
+  transition: all 0.35s ease;
 }
 
 .rule-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 0 30px rgba(139,92,246,0.4);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow:
+    0 0 35px rgba(139, 92, 246, 0.45),
+    0 0 60px rgba(34, 211, 238, 0.25);
 }
+
 
 /* ===== PRIZES ===== */
 .prizes-new {
@@ -697,26 +678,37 @@ body {
 
 .prize-new {
   padding: 2rem;
-  border-radius: 18px;
+  border-radius: 20px;
   min-width: 220px;
-  backdrop-filter: blur(10px);
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.15);
-  transition: 0.4s;
-}
 
-.prize-new span {
-  font-size: 2rem;
-  font-weight: bold;
+  background: rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    inset 0 0 25px rgba(255, 255, 255, 0.06),
+    0 25px 50px rgba(0, 0, 0, 0.45);
+
+  transition: all 0.4s ease;
 }
 
 .prize-new:hover {
-  transform: scale(1.07);
+  transform: translateY(-10px) scale(1.06);
 }
 
-.gold:hover { box-shadow: 0 0 40px #facc15; }
-.silver:hover { box-shadow: 0 0 40px #e5e7eb; }
-.bronze:hover { box-shadow: 0 0 40px #fb923c; }
+/* extra glow per prize */
+.gold:hover {
+  box-shadow: 0 0 45px rgba(250, 204, 21, 0.7);
+}
+
+.silver:hover {
+  box-shadow: 0 0 45px rgba(229, 231, 235, 0.8);
+}
+
+.bronze:hover {
+  box-shadow: 0 0 45px rgba(251, 146, 60, 0.7);
+}
 
 /* ===== CONTACT ===== */
 .contact-grid {
@@ -944,4 +936,259 @@ section {
 }
 #home, #rules, #prizes, #Contact {
   scroll-margin-top: 90px;
+}
+/* ===============================
+   🔥 GLASS CARD BASE (NO CHANGE)
+   =============================== */
+
+.rule-card,
+.prize-new,
+.contact-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+
+  background: rgba(20, 25, 40, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.08),
+    0 20px 40px rgba(0,0,0,0.35);
+}
+
+/* ===============================
+   🔝 CONTENT ALWAYS ON TOP
+   =============================== */
+
+.rule-card > *,
+.prize-new > *,
+.contact-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* ===============================
+   🔥 INNER FLAME PASS EFFECT
+   =============================== */
+
+.rule-card::after,
+.prize-new::after,
+.contact-card::after {
+  content: "";
+  position: absolute;
+  inset: -60% 0;
+
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255,255,255,0.38),
+    rgba(255,255,255,0.18),
+    transparent 65%
+  );
+
+  filter: blur(42px);
+  opacity: 0.55;
+
+  animation: flamePassInside 16s linear infinite;
+
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ===============================
+   🔥 FLAME MOVEMENT
+   =============================== */
+
+@keyframes flamePassInside {
+  from {
+    transform: translateY(65%);
+  }
+  to {
+    transform: translateY(-65%);
+  }
+}
+
+/* ===============================
+   ✨ EXTRA SOFTNESS (OPTIONAL)
+   =============================== */
+
+.rule-card::after {
+  animation-duration: 18s;
+}
+
+.prize-new::after {
+  animation-duration: 14s;
+  opacity: 0.65;
+}
+
+.contact-card::after {
+  animation-duration: 12s;
+  opacity: 0.7;
+}
+/* ===============================
+   🌑 SECTION BASE
+   =============================== */
+
+.section-dark {
+  padding: 80px 8%;
+  position: relative;
+  z-index: 1;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.4rem;
+  margin-bottom: 50px;
+  color: #fff;
+}
+
+/* ===============================
+   🔀 RULE TOGGLE
+   =============================== */
+
+.rule-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.toggle-btn {
+  padding: 12px 22px;
+  border-radius: 30px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.toggle-btn.active {
+  background: rgba(255,255,255,0.18);
+  box-shadow: 0 0 20px rgba(255,255,255,0.25);
+}
+
+/* ===============================
+   📦 RULES GRID
+   =============================== */
+
+.rules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+/* ===============================
+   🏆 PRIZES
+   =============================== */
+
+.prizes-new {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+  gap: 30px;
+}
+
+/* ===============================
+   📞 CONTACT
+   =============================== */
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+/* ===============================
+   🔥 FLAME CARD BASE
+   =============================== */
+
+.flame-card {
+  position: relative;
+  padding: 22px;
+  border-radius: 18px;
+
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.18);
+
+  color: #fff;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* CONTENT ABOVE FLAMES */
+.flame-card > * {
+  position: relative;
+  z-index: 3;
+}
+
+/* ===============================
+   🔥 INNER PASSING FLAMES
+   =============================== */
+
+.flame-card::after {
+  content: "";
+  position: absolute;
+
+  inset: -80% -20%;
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(255,255,255,0.45),
+      rgba(255,255,255,0.22),
+      transparent 70%
+    );
+
+  filter: blur(50px);
+  opacity: 0.7;
+
+  animation: flamePass 16s linear infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* DIFFERENT DEPTH FEEL */
+.rule-card::after {
+  animation-duration: 18s;
+  opacity: 0.6;
+}
+
+.prize-new::after {
+  animation-duration: 14s;
+  opacity: 0.75;
+}
+
+.contact-card::after {
+  animation-duration: 12s;
+  opacity: 0.8;
+}
+
+/* ===============================
+   🔁 FLAME MOTION
+   =============================== */
+
+@keyframes flamePass {
+  from {
+    transform: translateY(65%);
+  }
+  to {
+    transform: translateY(-65%);
+  }
+}
+
+/* ===============================
+   🏅 PRIZE COLORS (SOFT)
+   =============================== */
+
+.gold {
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.15);
+}
+
+.silver {
+  box-shadow: 0 0 25px rgba(200, 200, 200, 0.15);
+}
+
+.bronze {
+  box-shadow: 0 0 25px rgba(205, 127, 50, 0.18);
 }
