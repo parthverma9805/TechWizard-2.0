@@ -7,28 +7,38 @@ export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  const [rulesOpen, setRulesOpen] = useState(false);
 
   /* 📱 close menu on resize */
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 768) setOpen(false);
+      if (window.innerWidth > 768) {
+        setOpen(false);
+        setRulesOpen(false);
+      }
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  /* ⭐ FIXED SCROLL FUNCTION */
-  const goHomeAndScroll = (id) => {
+  /* ⭐ FIXED SCROLL + RULE TYPE */
+  const goHomeAndScroll = (id, ruleType) => {
     setOpen(false);
+    setRulesOpen(false);
 
     if (location.pathname !== "/") {
-      navigate("/");
+      navigate("/", { state: { ruleType } });
 
       setTimeout(() => {
         const section = document.getElementById(id);
         if (section) section.scrollIntoView({ behavior: "smooth" });
       }, 400);
     } else {
+      if (ruleType) {
+        window.dispatchEvent(
+          new CustomEvent("changeRules", { detail: ruleType })
+        );
+      }
       const section = document.getElementById(id);
       if (section) section.scrollIntoView({ behavior: "smooth" });
     }
@@ -51,10 +61,40 @@ export default function Navbar() {
         {open ? "✕" : "☰"}
       </div>
 
-      {/* 🔽 MOBILE DROPDOWN MENU */}
+      {/* 🔽 MOBILE MENU */}
       <div className={`nav-links ${open ? "active" : ""}`}>
         <button onClick={() => goHomeAndScroll("home")}>Home</button>
-        <button onClick={() => goHomeAndScroll("rules")}>Rules</button>
+
+        {/* RULES WITH SUB MENU */}
+        <button onClick={() => setRulesOpen(!rulesOpen)}>
+          Rules {rulesOpen ? "▴" : "▾"}
+        </button>
+
+        {rulesOpen && (
+          <div
+            style={{
+              paddingLeft: "1rem",
+              display: "flex",
+              flexDirection: "column",
+              gap: "0.6rem",
+            }}
+          >
+            <button
+              style={{ fontSize: "0.95rem" }}
+              onClick={() => goHomeAndScroll("rules", "participants")}
+            >
+              Participants
+            </button>
+
+            <button
+              style={{ fontSize: "0.95rem" }}
+              onClick={() => goHomeAndScroll("rules", "mentors")}
+            >
+              Mentors
+            </button>
+          </div>
+        )}
+
         <button onClick={() => goHomeAndScroll("prizes")}>Prizes</button>
         <button onClick={() => goHomeAndScroll("contact")}>Contact</button>
 
