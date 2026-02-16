@@ -1,11 +1,18 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import wizard from "../assets/techwizard-logo.jpeg";
 
 export default function Home() {
   const [activeRule, setActiveRule] = useState("participants");
   const location = useLocation();
+  const navigate = useNavigate();
+
+  /* ⏰ SET REGISTRATION OPEN TIME HERE */
+  const registrationDate = new Date("2026-02-16T23:00:00");
+
+  const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
+  const [timeLeft, setTimeLeft] = useState("");
 
   /* 🔄 HANDLE NAVBAR RULE CLICK */
   useEffect(() => {
@@ -13,17 +20,49 @@ export default function Home() {
       setActiveRule(location.state.ruleType);
     }
 
-    const handler = (e) => {
-      setActiveRule(e.detail);
-    };
-
+    const handler = (e) => setActiveRule(e.detail);
     window.addEventListener("changeRules", handler);
     return () => window.removeEventListener("changeRules", handler);
   }, [location.state]);
 
+  /* ⏰ COUNTDOWN TIMER */
+  useEffect(() => {
+    const updateTimer = () => {
+      const now = new Date();
+      const diff = registrationDate - now;
+
+      if (diff <= 0) {
+        setIsRegistrationOpen(true);
+        setTimeLeft("Registrations are now OPEN 🚀");
+        return;
+      }
+
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      setTimeLeft(`${hours}h ${minutes}m ${seconds}s`);
+    };
+
+    updateTimer();
+    const interval = setInterval(updateTimer, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  /* 🔓 PORTAL CLICK */
+  const handlePortalClick = () => {
+    if (!isRegistrationOpen) {
+      alert("🔒 Portal is locked. It will unlock when registrations open.");
+      return;
+    }
+
+    alert("🚀 Portal Unlocked!");
+    navigate("/portal");
+  };
+
   return (
     <>
-      {/* 🧙 HERO */}
+      {/* HERO */}
       <section id="home" className="wizard-hero">
         <div className="wizard-left">
           <img src={wizard} className="wizard-image" alt="TechWizard" />
@@ -43,30 +82,40 @@ export default function Home() {
           <p className="tagline">Unleash Your Inner Coder</p>
 
           <div className="hero-buttons">
-            <button className="reg-btn">REGISTRATION OPENING SOON</button>
-            <button className="portal-btn">Unlock Portal</button>
+
+            {/* ⏰ COUNTDOWN BUTTON */}
+            <button className="reg-btn no-click">
+              {isRegistrationOpen
+                ? "Registrations Open ✅"
+                : `Opens in ${timeLeft}`}
+            </button>
+
+            {/* 🔓 PORTAL BUTTON */}
+            <button
+              className={`portal-btn ${isRegistrationOpen ? "active-btn" : ""}`}
+              onClick={handlePortalClick}
+            >
+              {isRegistrationOpen ? "Enter Portal" : "Unlock Portal"}
+            </button>
+
           </div>
         </motion.div>
       </section>
 
-      {/* 📜 RULES */}
+      {/* RULES */}
       <section id="rules" className="section-dark">
         <h2 className="section-title">Hackathon Rules</h2>
 
         <div className="rule-toggle">
           <button
-            className={`toggle-btn ${
-              activeRule === "participants" ? "active" : ""
-            }`}
+            className={`toggle-btn ${activeRule === "participants" ? "active" : ""}`}
             onClick={() => setActiveRule("participants")}
           >
             Participants
           </button>
 
           <button
-            className={`toggle-btn ${
-              activeRule === "mentors" ? "active" : ""
-            }`}
+            className={`toggle-btn ${activeRule === "mentors" ? "active" : ""}`}
             onClick={() => setActiveRule("mentors")}
           >
             Mentors
@@ -76,60 +125,49 @@ export default function Home() {
         <div className="rules-grid">
           {(activeRule === "participants"
             ? [
-                "Team size: Maximum 6 members (minimum 1 female)",
-                "Round 1: PPT Presentation",
-                "Round 2: Prototype Development",
-                "PPT must follow SIH guidelines",
-                "₹80 registration fee per member",
-                "Certificates for all participants",
-                "Top teams nominated for SIH 2026",
+                "Team size: Each team must consist of 4 - 6 members (minimum 1 female)",
+                "All team members must be registered participants",
+                "All students are required to report to the auditorium by 9:00 AM sharp.",
+                "A minimum 2 team members must be present at the desk at all times.",
+                "Leaving the premises is permitted only in emergencies with prior coordinator approval.",
+                "During the presentation, a minimum of two team members must present their ideas.",
+                "Seeking help from students outside the premises for project development during the hackathon is strictly prohibited.",
+                "Students must not receive complete code from any mentor. If this happens, both the student team and the mentor will be disqualified.",
+                "₹150 registration fee per member taking part in the hackathon",
+                "GitHub submission from every team member is mandatory.",
               ]
             : [
-                "Mentors guide only assigned teams",
-                "Mentors must not code for teams",
+                "Mentors must not write the complete code for any team. If this occurs, both the mentor and the team will be disqualified.",
+                "All mentors are required to report to the auditorium by 9:00 AM sharp.",
+                "Mentors should guide only assigned teams",
                 "Idea ownership remains with students",
                 "Mentors available during evaluation",
                 "Mentors must ensure fair practices",
-                "Follow SIH ethics & conduct",
               ]
           ).map((rule, i) => (
-            <div key={i} className="rule-card flame-card">
-              {rule}
-            </div>
+            <div key={i} className="rule-card flame-card">{rule}</div>
           ))}
         </div>
       </section>
 
-      {/* 🏆 PRIZES */}
+      {/* PRIZES */}
       <section id="prizes" className="section-dark">
         <h2 className="section-title">Prize Pool</h2>
-
         <div className="prizes-new">
-          <div className="prize-new gold flame-card">
-            <h3>🥇 First Prize</h3>
-            <span>₹2,100</span>
-          </div>
-          <div className="prize-new silver flame-card">
-            <h3>🥈 Second Prize</h3>
-            <span>₹1,500</span>
-          </div>
-          <div className="prize-new bronze flame-card">
-            <h3>🥉 Third Prize</h3>
-            <span>₹1,000</span>
-          </div>
+          <div className="prize-new gold flame-card"><h3>🥇 First Prize</h3><span>₹2,500</span></div>
+          <div className="prize-new silver flame-card"><h3>🥈 Second Prize</h3><span>₹2,000</span></div>
+          <div className="prize-new bronze flame-card"><h3>🥉 Third Prize</h3><span>₹1,500</span></div>
         </div>
       </section>
 
-      {/* 📞 CONTACT */}
+      {/* CONTACT */}
       <section id="contact" className="section-dark">
         <h2 className="section-title">Contact Organizers</h2>
-
         <div className="contact-grid">
           <div className="contact-card flame-card">
             <h3>Shubham Srivastava</h3>
             <p>+91 6394658895</p>
           </div>
-
           <div className="contact-card flame-card">
             <h3>Deepak Kaushik</h3>
             <p>+91 7906924141</p>
