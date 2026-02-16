@@ -3,6 +3,8 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import ProblemStatement from "./pages/ProblemStatement";
 import FlameCanvas from "./components/FlameCanvas";
+import Portal from "./pages/Portal";
+
 
 export default function App() {
   return (
@@ -12,6 +14,7 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/portal" element={<Portal />} />
         <Route path="/problem-statement" element={<ProblemStatement />} />
       </Routes>
     </>
