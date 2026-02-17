@@ -9,7 +9,7 @@ export default function Home() {
   const navigate = useNavigate();
 
   /* ⏰ SET REGISTRATION OPEN TIME HERE */
-  const registrationDate = new Date("2026-02-16T23:00:00");
+  const registrationDate = new Date("2026-02-17T16:00:00");
 
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
   const [timeLeft, setTimeLeft] = useState("");
@@ -177,3 +177,4 @@ export default function Home() {
     </>
   );
 }
+
